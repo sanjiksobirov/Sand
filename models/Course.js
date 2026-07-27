@@ -1,35 +1,27 @@
 const mongoose = require('mongoose');
 
 const CourseSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  description: String,
   subject: {
     type: String,
     enum: ['Tarix', 'Geografiya', 'Adabiyot', 'Huquq', 'Kimyo'],
-    required: true
+    required: true,
+    unique: true
   },
-  color: String,
-  icon: String,
-  backgroundColor: String,
-  lessons: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Lesson'
-  }],
+  title: String,
+  description: String,
   instructor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  lessons: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Lesson'
+  }],
   students: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
-  rating: {
-    type: Number,
-    default: 0
-  },
+  image: String,
   createdAt: {
     type: Date,
     default: Date.now
